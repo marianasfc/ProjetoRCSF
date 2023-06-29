@@ -1,0 +1,180 @@
+{% extends "layout.html" %}
+
+{% block style %}
+<style>
+    h2 {
+        text-align: left;
+        color: white;
+    }
+
+    h1 {
+        width: 100%;
+        padding: 15px;
+        background: #f0f0f5;
+        box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #34495e;
+    }
+
+    .formula {
+        width: 100%;
+        padding: 10px;
+        background: #f0f0f5;
+        box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 25px;
+        color: black;
+    }
+
+    .text {
+        margin-top: 60px;
+        margin-right: 10px;
+        color: white;
+    }
+
+    p {
+        font-size: 20px;
+    }
+
+    .form {
+        width: 100%;
+        padding: 15px;
+        background: #f0f0f5;
+        box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    button {
+        font: 400 18px Roboto, sans-serif;
+        background-color: #34495e;
+        border-radius: 5px;
+        padding: 5px 10px;
+        margin: 5px 2px;
+        border: none;
+    }
+
+    form input {
+        width: 100%;
+        height: 60px;
+        padding: 0 24px;
+        margin: 5px 2px;
+        color: #333;
+        border: 1px solid #dcdce6;
+        border-radius: 8px;
+    }
+
+    .resultado {
+        margin-top: 30px;
+        margin-left: 100px;
+        color: white;
+    }
+
+    .c {
+        width: 100%;
+        padding: 15px;
+        background: #f0f0f5;
+        box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+        margin-left: 10px;
+    }
+
+    .left {
+        text-align: left;
+        float: left;
+        width: 55%;
+    }
+
+    .right {
+        float: right;
+        width: 44%;
+    }
+    label {
+        color: #333;
+    }
+
+    .resultado{
+        width: 75%;
+        padding: 10px;
+        border-radius: 8px;
+        margin-top: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;  
+        color: white;
+    }
+    .formulario{
+        margin-top: 100px;
+    }
+
+</style>
+{% endblock style %}
+
+{% block main %}
+    <body>
+        <div class="main">
+            <div class="titulo">
+                <div class="text">
+                    <h1>Erlang B</h1>
+                    <br>
+                    <p>O Erlang B é um modelo matemático amplamente utilizado na teoria do tráfego para estimar a
+                        probabilidade de bloqueio em um sistema de comunicação baseado em circuitos,
+                        como um sistema telefônico. Ele fornece uma maneira de calcular a probabilidade de que as chamadas
+                        sejam bloqueadas devido à falta de canais disponíveis no sistema.</p>
+                    </p>
+                    <div class="left">
+                        <h2>Fórmula do Erlang B</h2>
+                        <p>A fórmula do Erlang B para calcular a probabilidade de bloqueio, número de canais e tráfego é a
+                            seguinte:</p>
+                        <h3>Probabilidade de Bloqueio</h3>
+                        <div class="formula">
+                            <p>Probabilidade de Bloqueio = <sup>Tráfego<sup>Número de Canais</sup> / Número de Canais!</sup>
+                                / Σ(k=0 até Número de Canais) <sup>Tráfego<sup>k</sup> / k!</sup></p>
+                        </div>
+                        <h3>Número de Canais</h3>
+                        <div class="formula">
+                            <p>Número de Canais = ln(Tráfego) - Σ(n=1 até Número de Canais) <sup>Tráfego<sup>n</sup></sup> /
+                                n!</p>
+                        </div>
+                        <h3>Tráfego</h3>
+                        <div class="formula">
+                            <p>Tráfego = (Taxa de Chegada de Chamadas) * (Duração Média da Chamada)</p>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="formulario">
+                           <h2>Cálculo da Probabilidade de Bloqueio</h2>
+                        <div class="c">
+                            <form action="" method="POST">
+                             {%csrf_token%}
+                             <label>trafego: <input type="number" name="t"></label>
+                             <br>
+                             <label>número de canais: <input type="number" name="c"></label>
+                             <br>
+                             <button type="submit" style="color: white;">Calcular</button>
+                         </form> 
+                         </div> 
+                         <div class="resultado">
+                            <p>{{resultado}}</p>
+                        </div> 
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+{% endblock main %}

@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block style %}
+<style>
+    h1 {
+        width: 100%;
+        padding: 15px;
+        background: #f0f0f5;
+        box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #34495e;
+    }
+    .text {
+        
+        margin-top: 10px;
+        margin-right: 10px;
+        color: white;
+    }
+    p {
+        font-size: 20px;
+    }
+    h2 {
+        text-align: left;
+        color: white;
+    }
+    img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 200px;
+        margin-top: 20px;
+    }
+</style>
+{% endblock style %}
+
+
+
+{% block main %}
+<body>
+    <h1>Descriçaõ do cenário</h1>
+    <div class="text">
+        <h2>Cenário</h2>
+        <p>Neste cenário, a campanha de medidas foi realizada em um escritório moderno de uma empresa de tecnologia. O escritório possui várias salas, corredores e uma área de descanso comum. A campanha de medidas teve como objetivo avaliar o decaimento do sinal WiFi com o aumento da distância em um ambiente corporativo.</p>
+        <h2>Equipamento e Aplicações</h2>
+        <p>Foram utilizados os seguintes equipamentos e aplicações:</p>
+        <ol>
+            <li>Dispositivos: Um telemóvel e um portátil.</li>
+            <li>Aplicação: Wi-Fi Analyser, uma aplicação para PC que permite medir a intensidade do sinal WiFi recebido em dBm.</li>
+        </ol>
+        <h2>Configuração</h2>
+        <p>A configuração utilizada para a transmissão do sinal WiFi foi a seguinte:</p>
+        <ol>
+            <li>Frequência de Operação: Definiu-se a frequência de operação em 2.4 GHz, que é uma frequência comum para redes WiFi.</li>
+            <li>Potência Transmitida: A potência de transmissão do sinal WiFi foi ajustada para 15 dBm, que é um valor moderado.</li>
+        </ol>
+        <h2>Frequência Medida</h2>
+        <p>Durante a campanha de medidas, a intensidade do sinal WiFi foi medida em uma frequência específica de 2.4 GHz. Essa frequência foi selecionada por ser amplamente utilizada em ambientes corporativos.</p>
+        <h2>Fotografias</h2>
+        <h2>Mapbox</h2>
+        <div class="imagem">
+            {% load static %}
+            <img src= "{% static 'core/grafico4.png' %}" alt="">
+        </div>
+    </div>
+    
+</body>
+{% endblock main %}

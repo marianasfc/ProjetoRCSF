@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block style %}
+<style>
+    .caixa{
+        width: 100%;
+        padding: 15px;
+        background: #f0f0f5;
+        box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    } 
+    h3{
+        color: white;
+    }
+
+</style>
+
+{% endblock style %}
+
+{% block main %}
+
+    <h3>Edita Tópico</h3>
+
+    <div class="caixa">
+        <form action="{% url 'core:edita_topico' topico_id %}" method="POST">
+        {% csrf_token %}
+
+        <table>
+            {{topico_form}}
+        </table>
+    
+        <input type="submit" class="btn btn-success  btn-sm" value="Guardar">
+        <a href="{% url 'core:apaga_topico' topico_id %}" class="btn btn-outline-danger btn-sm">Apagar</a>
+        </form>
+    </div>
+
+
+
+{% endblock main %}
+
+</body>
+
+</html>

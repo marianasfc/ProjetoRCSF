@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block style %}
+<style>
+    article {
+        color: white;
+    }
+
+    article .img {
+        align-content: flex-end;
+    }
+
+    .esquerda {
+        float: left;
+        width: 50%;
+        text-align: left;
+        margin-top: 100px;
+    }
+
+    .direita {
+        float: left;
+        width: 50%;
+        text-align: center;
+    }
+</style>
+
+{% endblock style %}
+
+{% block main %}
+<div class="blocomain">
+    <div class="esquerda">
+        <article>
+            <p>Este website congrega conteúdos desenvolvidos na UC de Complementos de Redes.</p>
+            <p>Tais como o desenvolvimento de uma página Web em Django e html.</p>
+            <p>Procura também ser um meio para guardar a informação transmitida em aula, tais como os temas abordados
+                dos tópicos.</p>
+        </article>
+    </div>
+
+    <div class="direita">
+        <article>
+            {% load static %}
+            <img src="{% static 'core\redes.jpeg' %}" width="500px" alt="">
+        </article>
+    </div>
+</div>
+
+
+
+{% endblock main %}
+
+</body>
+
+</html>

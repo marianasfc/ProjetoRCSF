@@ -1,0 +1,152 @@
+{% extends "layout.html" %}
+
+<head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        showProcessingMessages: false, //Close js loading process information
+        messageStyle: "none", //Do not display information
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+            inlineMath:  [ ["$", "$"] ], //In-line formula selection$
+            displayMath: [ ["$$","$$"] ], //The formula selection in the paragraph$$
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'], //Avoid certain tags
+            ignoreClass:"comment-content", //Avoid tags containing the Class
+            processClass: "mathjax-latex",
+        },
+        "HTML-CSS": {
+            availableFonts: ["STIX","TeX"], //Optional font
+            showMathMenu: false //Close the right-click menu display
+        }
+    });
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub])
+  </script>
+    <script src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+
+{% block style %}
+<style>
+    .left {
+        float: left;
+        width: 50%;
+        text-align: center;
+    }
+
+    .right {
+        float: left;
+        width: 50%;
+        text-align: center;
+        color: black;
+    }
+
+    .N {
+        width: 100%;
+        padding: 15px;
+        background: #f0f0f5;
+        box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+        margin-left: 10px;
+    }
+
+    .nyquist {
+        margin-top: 60px;
+        margin-right: 10px;
+        color: white;
+    }
+
+    .formula {
+        width: 50%;
+        padding: 10px;
+        background: #f0f0f5;
+        box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 50px;
+        margin-left: 225px;
+        color: black;
+    }
+
+    .form {
+        width: 100%;
+        padding: 15px;
+        background: #f0f0f5;
+        box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    button {
+        font: 400 18px Roboto, sans-serif;
+        background-color: #34495e;
+        border-radius: 5px;
+        padding: 5px 10px;
+        margin: 5px 2px;
+        border: none;
+    }
+
+    form input {
+        width: 100%;
+        height: 60px;
+        padding: 0 24px;
+        margin: 5px 2px;
+        color: #333;
+        border: 1px solid #dcdce6;
+        border-radius: 8px;
+    }
+
+    .resultado {
+        margin-top: 10px;
+        color: white;
+    }
+</style>
+
+{% endblock style %}
+
+
+{% block main %}
+
+<div>
+    <div class="left">
+        <div class="nyquist">
+            <h1>Limite de Nyquist</h1>
+            <p>O limite de Nyquist é a frequência máxima que pode ser medida com precisão a partir de uma amostra de
+                dados. Sua expressão é:</p>
+            <div class="formula">
+                <p>f<sub>Nyquist</sub> = f<sub>s</sub>/2</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="right">
+        <!-- Nyquist calculator -->
+        <div class="calculatorN">
+            <!-- Input fields and submit button -->
+            <div class="N">
+                <h2>Calculadora do limite de Nyquist</h2>
+                <form action="" method="POST">
+                    {%csrf_token%}
+                    B (MHz): <input type="number" name="b" />
+                    V (número de níveis): <input type="number" name="v" />
+                    <button type="submit" style="color: white;">Calcular</button>
+                </form>
+            </div>
+
+            <!-- Result -->
+            <div class="resultado">
+                <p>{{resultado}}</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock main %}

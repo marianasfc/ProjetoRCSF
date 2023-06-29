@@ -1,0 +1,149 @@
+{% extends "layout.html" %}
+
+{% block style %}
+<style>
+    .titulo {
+        text-align: center;
+        color: white;
+
+    }
+
+    .textocorpo {
+        text-align: left;
+        padding: 25px 100px;
+        color: white;
+        font-size: 25px;
+    }
+
+    .left {
+        text-align: left;
+        float: left;
+        width: 50%;
+    }
+
+    .right {
+        float: right;
+        width: 50%;
+    }
+
+    .imagem1 {
+        display: flex;
+        flex-direction: column;
+        padding: 100px 200px;
+    }
+
+    .imagem2 {
+        display: flex;
+        flex-direction: column;
+        padding: 100px 200px;
+    }
+
+    .imagem3 {
+        display: flex;
+        flex-direction: column;
+        padding: 1100px 200px;
+    }
+
+    h1 {
+        width: 100%;
+        padding: 15px;
+        background: #f0f0f5;
+        box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #34495e;
+    }
+</style>
+{% endblock style %}
+
+{% block main %}
+<div class="titulo">
+    <h1><b>Sinais</b></h1>
+    <div class="duascolunas">
+        <div class="left">
+            <div class="textocorpo">
+                <ul>
+                    <li><b>Princípio:</b></li>
+                </ul>
+                <p>Os sinais analógicos codificam bits digitais.</p>
+                <p>A informação pode ser transmitida (por fios ou rádio) variando algumas propriedades físicas como
+                    tensão ou corrente.</p>
+                <p>Representando o valor da tensão ou corrente em função de tempo, f(t), podemos modelar o comportamento do sinal e analisá-lo matematicamente.</p>
+                <ul>
+                    <li><b>Representação de frequência:</b></li>
+                </ul>
+                <p>Um sinal periódico de período T (f =1/T) pode ser representado pelas suas componentes de frequência (análise de Fourier)</p>
+                <ul>
+                    <li><b>Largura de Banda:</b></li>
+                </ul>
+                <p>A largura de banda B é o intervalo de frequências no qual não há atenuação de maior do sinal.</p>
+                <p>Na prática, a largura de banda corresponde à largura na qual o sinal recebido decai metade.</p>
+                <p>Num fio ou fibra, a largura de banda é uma característica física, e depende da espessura e comprimento.</p>
+                <ul>
+                    <li><b>Sinais Passa-banda:</b></li>
+                </ul>
+                <p>Um filtro passa-banda permite que vários sinais partilhem uma região do espectro, melhorando a eficiência do sistema.</p>
+                <p>A largura de banda das frequências que são passadas determina as informações que podem ser transportadas, independentemente das frequências inicial e final.</p>
+                <ul>
+                    <li><b>Sinais sobre um Fio:</b></li>
+                </ul>
+                <p>O que acontece a um sinal, quando passa por um fio?</p>
+                <ol>
+                    <li>O sinal sofre atraso (propaga-se a ⅔c)</li>
+                    <li>O sinal é atenuado (pode ter um alcance de metros a kms, chegando com uma amplitude menor).</li>
+                    <li>As frequências acima de um valor são altamente atenuadas (largura de banda limitada).</li>
+                    <li>É adicionado ruído ao sinal (que causa erros, se o sinal fôr pequeno).</li>
+                </ol>
+                <ul>
+                    <li><b>Sinais sobre Fibra:</b></li>
+                </ul>
+                <p>A luz propaga-se com perdas muito baixa em três bandas de frequência muito largas.</p>
+                <p>Usa-se uma portadora para enviar informações.</p>
+                <ul>
+                    <li><b>Sinais radio:</b></li>
+                </ul>
+                <p>Num canal rádio, os sinais são transmitidos numa portadora (tal como fibra).</p>
+                <p>As propriedades das ondas radio dependem da frequência:</p>
+                <p>A frequências baixas atravessam bem obstáculos</p>
+                <p>A frequências altas viajam em linhas retas e refletem-se em obstáculos, podendo ser atenuadas pela chuva</p>
+                <p>Múltiplos sinais transmitidos na mesma frequência interferem num recetor.</p>
+                <p>A interferência leva à noção de reutilização espacial da mesma frequência, se os transmissores estiverem suficientemente afastados.</p>
+                <p>Os sinais rádio refletem-se em objetos e tomam vários caminhos</p>
+                <ul>
+                    <li><b>Transmissão Rádio:</b></li>
+                </ul>
+                <p>OS sinais radio penetram bem os edifícios e propagam-se por longas distâncias sofrendo atenuação de percurso.</p>
+                <ul>
+                    <li><b>Transmissão por Luz</b></li>
+                </ul>
+                <p>Pode-se usar luz em linha de vista (sem fibra) para ligações</p>
+                <p>A luz é altamente directional e tem muita largura de banda</p>
+                <p>Usam-se LEDs/câmaras e lasers/fotodetectores</p>
+                <ul> 
+                    <li><b>Comunicação por Satélite</b></li>
+                </ul>
+                <p>Os satélites são eficazes para radio-difusão e comunicações em qualquer lugar / a qualquer hora</p>
+            </div>
+        </div>
+
+        <div class="right">
+            <div class="imagem1">
+                {% load static %}
+                <img src="{% static 'core\sinais.jpg' %}" width="500px" alt="">
+            </div>
+            <div class="imagem2">
+                {% load static %}
+                <img src="{% static 'core\frequencia.jpg' %}" width="400px" alt="">
+            </div>
+            <div class="imagem3">
+                {% load static %}
+                <img src="{% static 'core\radio.jpg' %}" width="500px" alt="">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock main %}

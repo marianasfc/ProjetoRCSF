@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block style %}
+<style>
+    .conteudo{
+        border-radius: 8px;
+    }
+    h3{
+        
+        color: white;
+    }
+    h5{
+        border-radius: 8px;
+    }
+
+</style>
+
+{% endblock style %}
+
+{% block main %}
+
+<h3>Tópicos abordados</h3>
+
+{% load custom_tags %}
+
+{% for topico in topicos  %}
+
+<h5>{{ topico }} <a href="{% url 'core:edita_topico' topico.id %}" class="btn btn-outline-primary  btn-sm"  style="padding:0 1ch" >Editar</a> </h5>
+
+    {% for conteudo in topico.conteudos.all|sort_by:'ordem' %}
+    <div class="conteudo"> {{ conteudo }}  <a href="{% url 'core:edita_conteudo' conteudo.id %}" class="btn btn-outline-primary  btn-sm" style="padding:0 1ch" >Editar</a>
+    </div>
+    {% endfor %}
+
+
+{% endfor %}
+
+<br>
+
+<div id="novos">
+    <a href="{% url 'core:novo_topico' %}" class="btn btn-success  btn-sm " >Novo Tópico</a>
+    <a href="{% url 'core:novo_conteudo' %}" class="btn btn-success  btn-sm" >Novo Conteúdo</a>    
+</div>
+
+{% endblock main %}
+
+</body>
+
+</html>

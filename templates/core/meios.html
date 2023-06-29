@@ -1,0 +1,260 @@
+{% extends "layout.html" %}
+
+
+{% block style %}
+<style>
+    .titulo {
+        text-align: center;
+        color: white;
+
+    }
+
+    .textocorpo {
+        text-align: left;
+        padding: 25px 100px;
+        color: white;
+        font-size: 25px;
+    }
+
+    .left {
+        text-align: left;
+        float: left;
+        width: 50%;
+    }
+
+    .right {
+        float: right;
+        width: 50%;
+    }
+
+    .imagem1 .img {
+        float: right;
+        width: 50%;
+        align-content: flex-end;
+
+    }
+
+    .imagem1 {
+        display: flex;
+        flex-direction: column;
+        padding: 40px 200px;
+    }
+
+    .imagem2 {
+        display: flex;
+        flex-direction: column;
+        padding: 500px 175px;
+    }
+
+    .imagem3 {
+        display: flex;
+        flex-direction: column;
+        padding: 50px 175px;
+    }
+
+    .imagem4 {
+        display: flex;
+        flex-direction: column;
+        padding: 150px 175px;
+    }
+
+    .imagem5 {
+        display: flex;
+        flex-direction: column;
+        padding: 325px 150px;
+    }
+
+    h1 {
+        width: 100%;
+        padding: 15px;
+        background: #f0f0f5;
+        box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #34495e;
+    }
+
+    h2 {
+        width: 100%;
+        padding: 15px;
+        background: #f0f0f5;
+        box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #34495e;
+    }
+</style>
+
+{% endblock style %}
+
+{% block main %}
+<div class="titulo">
+    <h1><b>Meios de transmissão</b></h1>
+    <div class="textocorpo">
+        <p>O objetivo da camada física é transportar bits duma máquina para outra.</p>
+        <p>Os meios de transmissão são agrupados em:</p>
+        <ul>
+            <li><b>Meios de transmissão guiada;</b></li>
+            <p>Ex: fios de cobre, cabo coaxial, fibra óptica</p>
+            <li><b>Meios de transmissão não-guiada;</b></li>
+            <p>Ex: WiFi, 3G/4G, satélite, lasers.</p>
+        </ul>
+        <h2>Armazenamento Persistente</h2>
+        <p>Armazenamento magnético ou de estado sólido</p>
+        <p>Forma comum de transportar dados</p>
+        <ul>
+            <li>Grave no armazenamento persistente</li>
+            <li>Transporte fisicamente a fita ou os discos para a máquina de destino</li>
+            <li>Leia os dados novamente</li>
+        </ul>
+        <p>Económico para aplicações onde uma alta taxa de dados ou custo por bit transportado é o fator chave.</p>
+        <p>A taxa de dados é mais rápida do que qualquer rede.</p>
+        <p>No entanto, o atraso da mensagem é muito elevado.</p>
+    </div>
+</div>
+
+<div class="transmissaoGuiada">
+    <h2>Transmissão guiada</h2>
+    <div class="duascolunas">
+        <div class="left">
+            <div class="textocorpo">
+                <ul>
+                    <li><b>Cabo de par trançado:</b></li>
+                </ul>
+                <p>Par de fios de cobre trançados, muito comuns e baratos</p>
+                <p>Trançado reduz sinal radiado (interferencia)</p>
+                <ul>
+                    <li><b>Terminologia de ligações:</b></li>
+                </ul>
+                <ol>
+                    <li>Ligação <b>full-duplex</b></li>
+                    <p>Usada para transmissão em ambas as direções ao mesmo tempo.</p>
+                    <p>Ex: use pares trançados diferentes para cada direção.</p>
+                    <li>Ligação <b>half-duplex</b></li>
+                    <p>Ambas as direções, mas não ao mesmo tempo.</p>
+                    <p>Ex: os remetentes se revezam em um canal sem fio.</p>
+                    <li>Ligação <b>simplex</b></li>
+                    <p>Apenas uma direção fixa em todos os momentos. Pouco comum.</p>
+                </ol>
+                <ul>
+                    <li><b>Cabo coaxial:</b></li>
+                </ul>
+                <p>Tem bom débito e blindagem ao ruido.</p>
+                <p>Grandes larguras de banda (GHz) e distâncias.</p>
+                <p>Originalmente usados em linhas telefónicas de longa-distância, foram substituidos por fibra.</p>
+                <ul>
+                    <li><b>Power-line:</b></li>
+                </ul>
+                <p>Usam a rede elétrica de casa usada para transmissão de dados, atingindo pelo menos 100 Mbps.</p>
+                <ul>
+                    <li><b>Fibra óptica:</b></li>
+                </ul>
+                <p>Permitem largura de banda praticamente infinita.</p>
+                <p>Usos:</p>
+                <ol>
+                    <li>Transmissão de longa distância em backbones de rede.</li>
+                    <li>LANs de alta velocidade</li>
+                    <li>Acesso de alta velocidade à Internet</li>
+                </ol>
+                <p>Componentes chave: Fonte de luz, meio de transmissão e detector.</p>
+                <p>Sistema de transmissão usa física.</p>
+                <p>Permite débitos muito elevados e longas distâncias:</p>
+                <ol>
+                    <li>Ligações ISP, Fiber-to-the-Home (FTTH)</li>
+                    <li>A luz é transportada por um fio de vidro muito longo e fino.</li>
+                </ol>
+                <p>Transmissão de luz através de fibra</p>
+                <p>Atenuação da luz através do vidro</p>
+                <ol>
+                    <li>Depende do comprimento de onda da luz</li>
+                    <li>Definido como a relação entre a potência do sinal de entrada e saída</li>
+                </ol>
+                <p>Cabos de fibra - Semelhante ao coaxial, exceto sem a trança</p>
+                <p>Dois tipos de fontes de luz de sinalização:</p>
+                <ol>
+                    <li>LEDs (diodos emissores de luz)</li>
+                    <li>Lasers semicondutores</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="right">
+            <div class="imagem1">
+                {% load static %}
+                <img src="{% static 'core\cabo .jpg' %}" width="350px" alt="">
+            </div>
+            <div class="imagem2">
+                {% load static %}
+                <img src="{% static 'core\caboCoaxial.jpg' %}" width="500px" alt="">
+            </div>
+            <div class="imagem3">
+                {% load static %}
+                <img src="{% static 'core\fibraOtica.jpg' %}" width="500px" alt="">
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="transmissaoNaoGuiada">
+    <h2>Transmissão não guiada</h2>
+    <div class="duascolunas">
+        <div class="left">
+            <div class="textocorpo">
+                <ul>
+                    <li><b>Wireless</b></li>
+                </ul>
+                <p>O transmissor radia sinal sobre uma região</p>
+                <p>Radia em muitas direções, ao contrário de um fio, para alcançar muitos receptores</p>
+                <p>Mas complica, pois sinais próximos (mesma freq.) interferem num receptor;</p>
+                <p>É preciso coordenar o uso do meio.</p>
+                <ul>
+                    <li><b>Transmissão sem fios</b></li>
+                </ul>
+                <p>Espectro eletromagnético</p>
+                <p>Transmissão de rádio</p>
+                <p>Transmissão de microondas</p>
+                <p>Transmissão de luz</p>
+                <p>Wireless vs. Fios / Fibra</p>
+                <ul>
+                    <li><b>Espectro eletromagnético</b></li>
+                </ul>
+                <p>Quando os eletrões se movem, criam ondas eletromagénticas que se podem propagar no espaço.</p>
+                <p>O número de oscilações por segundo é denominado por frequência, f,medida de Hz</p>
+                <p>A distancia entre dois máximos é o comprimento de onda</p>
+                <p>Velocidade da luz:</p>
+                <ol>
+                    <li>No vácuo, todas as ondas viajam à mesma velocidade, a velocidade da luz, c</li>
+                    <li>No cobre ou fibra, a luz viaja a 2/3 do seu valor</li>
+                </ol>
+                <p>Cada banda de frequência tem a sua aplicação:</p>
+                <ul>
+                    <li><b>Tipos de transmissão</b></li>
+                </ul>
+                <p>Normalmente as transmissões usam largura de banda estreita</p>
+                <p>Concentram sinais e usam espectro eficientemente para obter debitos razoáveis se transmitirem com potencia suficiente.</p>
+            </div>
+        </div>
+
+        <div class="right">
+            <div class="imagem4">
+                {% load static %}
+                <img src="{% static 'core\wireless.jpg' %}" width="500px" alt="">
+            </div>
+            <div class="imagem5">
+                {% load static %}
+                <img src="{% static 'core\espectroElectromagnético.jpg' %}" width="600px" alt="">
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock main %}

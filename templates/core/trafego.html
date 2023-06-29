@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+
+{% block style %}
+<style>
+    h2 {
+        text-align: left;
+        color: white;
+    }
+
+    h1 {
+        width: 100%;
+        padding: 15px;
+        background: #f0f0f5;
+        box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #34495e;
+    }
+
+    .text {
+        margin-top: 60px;
+        margin-right: 10px;
+        color: white;
+    }
+
+    p {
+        font-size: 20px;
+    }
+</style>
+{% endblock style %}
+
+
+
+{% block main %}
+<body>
+    <div class="main">
+        <div class="titulo">
+            <div class="text">
+                <h1>Conceitos Gerais da Teoria do Tráfego</h1>
+                <br>
+                <p>A teoria do tráfego é um campo de estudo que analisa o fluxo de comunicação em redes, sistemas de
+                    transporte e outros sistemas que envolvem a movimentação de recursos.
+                    Essa teoria é aplicável a diversas áreas, como telecomunicações, transportes urbanos, internet,
+                    entre outros. </p>
+                <p>Procura entender e prever o comportamento dos sistemas sob diferentes condições de tráfego.</p>
+                <br>
+                <h2>Taxa de Chegada</h2>
+                <br>
+                <p>A taxa de chegada é uma medida que indica a quantidade média de eventos ou pacotes que chegam a um
+                    sistema em um determinado intervalo de tempo.
+                    Em sistemas de telecomunicações, por exemplo, a taxa de chegada pode representar o número médio de
+                    chamadas telefônicas que chegam a uma central em um minuto.</p>
+                <br>
+                <h2>Capacidade</h2>
+                <br>
+                <p>A capacidade de um sistema de tráfego é a quantidade máxima de eventos que ele pode processar ou
+                    acomodar em um determinado período de tempo.
+                    Em sistemas de transporte, a capacidade pode se referir ao número máximo de veículos que uma rodovia
+                    suporta em uma hora.</p>
+                <br>
+                <h2>Probabilidade de Bloqueio</h2>
+                <br>
+                <p>A probabilidade de bloqueio é uma medida que indica a chance de um evento ou recurso ser bloqueado ou
+                    rejeitado em um sistema de tráfego.
+                    Em telecomunicações, por exemplo, a probabilidade de bloqueio pode representar a chance de uma
+                    chamada telefônica ser bloqueada devido
+                    à falta de canais disponíveis em uma central telefônica.</p>
+                <br>
+                <h2>Carga de Tráfego</h2>
+                <p>A carga de tráfego é uma medida que representa a utilização ou ocupação do sistema de tráfego em
+                    relação à sua capacidade.
+                    Ela pode ser calculada como a taxa de chegada de eventos dividida pela capacidade do sistema. A
+                    carga de tráfego é importante para
+                    dimensionar e planejar a capacidade necessária em um sistema.</p>
+                 <br>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock main %}

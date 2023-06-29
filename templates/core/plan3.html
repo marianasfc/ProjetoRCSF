@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block style %}
+<style>
+    h1 {
+        width: 100%;
+        padding: 15px;
+        background: #f0f0f5;
+        box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #34495e;
+    }
+
+    h2 {
+        text-align: left;
+        color: white;
+    }
+
+    img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 50px;
+        margin-left: 200px;
+    }
+    .resultado {
+        margin-top: 30px;
+        margin-left: 100px;
+        color: white;
+    }
+
+</style>
+
+{% endblock style %}
+
+
+{% block main %}
+
+<body>
+    <div>
+        <h1>Planemaneto Celular</h1>
+        <div>
+            <h2>Gráfico com C/I relativo a vários padrões celulares</h2>
+            <div class="resultado">
+                {% load static %}
+                <img src="{% static 'core/grafico6.png' %}" alt="">
+            </div>
+        </div>
+    </div>
+    <div>
+        <h2>Heatmap de C/I para Padrões Celulares</h2>
+        <div class="resultado">
+            {% load static %}
+            <img src="{% static 'core/grafico7.png' %}" alt="">
+        </div>
+
+</body>
+{% endblock main %}

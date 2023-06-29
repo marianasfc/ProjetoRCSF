@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block style %}
+<style>
+    .titulo {
+        text-align: center;
+        color: white;
+
+    }
+
+    .textocorpo {
+        text-align: left;
+        padding: 25px 100px;
+        color: white;
+        font-size: 25px;
+    }
+
+    h1 {
+        width: 100%;
+        padding: 15px;
+        background: #f0f0f5;
+        box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #34495e;
+    }
+
+</style>
+{% endblock style %}
+
+{% block main %}
+<div class="titulo">
+    <h1><b>Modulações</b></h1>
+    <div class="textocorpo">
+        <p>Os princípios gerais das modulações incluem a modulação de amplitude (AM), a modulação de frequência (FM) e a modulação de fase (PM).</p>
+        <ul>
+            <li><b>AM:</b></li>
+        </ul>
+        <p>A modulação de amplitude consiste em variar a amplitude do sinal portador (geralmente uma onda senoidal) com base no sinal modulante. </p>
+        <p>A informação é transmitida através da variação da amplitude do sinal.</p>
+        <ul>
+            <li><b>FM:</b></li>
+        </ul>
+        <p>A modulação de frequência consiste em variar a frequência do sinal portador com base no sinal modulante. </p>
+        <p>A informação é transmitida através da variação da frequência do sinal.</p>
+    </div>
+</div>
+
+{% endblock main %}

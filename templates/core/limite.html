@@ -1,0 +1,122 @@
+{% extends "layout.html" %}
+<head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        showProcessingMessages: false, //Close js loading process information
+        messageStyle: "none", //Do not display information
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+            inlineMath:  [ ["$", "$"] ], //In-line formula selection$
+            displayMath: [ ["$$","$$"] ], //The formula selection in the paragraph$$
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'], //Avoid certain tags
+            ignoreClass:"comment-content", //Avoid tags containing the Class
+            processClass: "mathjax-latex",
+        },
+        "HTML-CSS": {
+            availableFonts: ["STIX","TeX"], //Optional font
+            showMathMenu: false //Close the right-click menu display
+        }
+    });
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub])
+  </script>
+  <script src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+
+{% block style %}
+  <style>
+
+    .left {
+      float: left;
+      width: 50%;
+      text-align: center;
+    }
+
+    .left .h1{
+      color: white;
+    }
+
+    .right {
+      float: right;
+      width: 50%;
+      text-align: center;
+    }
+
+    .calculator {
+      margin: 20px;
+    }
+
+    .calculator .form{
+        width: 100%;
+        padding: 15px;
+        background: #f0f0f5;
+        box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    </style>
+{% endblock style %}
+
+
+{% block main %}
+  <body>
+    <div>
+
+      <div class="left">
+        <h1 style="color: white;">Limite de Nyquist</h1>
+        <p style="color: white;">O limite de Nyquist é a frequência máxima que pode ser medida com precisão a partir de uma amostra de dados. Sua expressão é:</p>
+        <p style="color: white;">f<sub>Nyquist</sub> = f<sub>s</sub>/2</p>
+        <h1 style="color: white;">Capacidade de Shannon</h1>
+        <p style="color: white;">A capacidade de Shannon é o limite teórico máximo de taxa de transmissão de informação em um canal de comunicação. Sua expressão é:</p>
+        <p style="color: white;">C = B log<sub>2</sub>(1 + S/N<sub>0</sub>)</p>
+      </div>
+
+
+      <div class="right">
+        <!-- Nyquist calculator -->
+        <div class="calculator">
+      
+          <h2 style="color: white;">Calculadora do limite de Nyquist</h2>
+          <!-- Input fields and submit button -->
+          <form action="" method="POST" style="color: white;">
+            {%csrf_token%}
+            B (MHz): <input type="text" id="nyquist_b"><br>
+            V (número de níveis): <input type="text" id="nyquist_v"><br>
+            <input type="submit" value="Calcular" onclick="calculateNyquist()">
+          </form>
+          
+          <!-- Result -->
+          <div class="resultado">
+            <p style="color: white;">Débito: {{resultado}}</p>
+          </div>
+        
+        </div>
+
+        <!-- Shannon calculator -->
+        <div class="calculator">
+
+          <h2 style="color: white;">Calculadora da capacidade de Shannon</h2>
+          <!-- Input fields and submit button -->
+          <form action="" method="POST" style="color: white;">
+            {%csrf_token%}
+            SNR (dB): <input type="text" id="shannon_snr"><br>
+            B (MHz): <input type="text" id="shannon_b"><br>
+            <input type="submit" value="Calcular" onclick="calculateShannon()">
+          </form>
+
+          <!-- Result -->
+          <div class="resultado">
+            <p style="color: white;">Débito: {{resultado}}</p>
+          </div>
+
+          </div>
+
+      </div>
+
+    </div>
+
+{% endblock main %}
+

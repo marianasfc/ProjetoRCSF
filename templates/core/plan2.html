@@ -1,0 +1,113 @@
+{% extends "layout.html" %}
+
+{% block style %}
+<style>
+    h1 {
+        width: 100%;
+        padding: 15px;
+        background: #f0f0f5;
+        box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #34495e;
+    }
+
+    h2 {
+        text-align: left;
+        color: white;
+    }
+
+    .form {
+        width: 100%;
+        padding: 15px;
+        background: #f0f0f5;
+        box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    button {
+        font: 400 18px Roboto, sans-serif;
+        background-color: #34495e;
+        border-radius: 5px;
+        padding: 5px 10px;
+        margin: 5px 2px;
+        border: none;
+    }
+
+    form input {
+        width: 100%;
+        height: 60px;
+        padding: 0 24px;
+        margin: 5px 2px;
+        color: #333;
+        border: 1px solid #dcdce6;
+        border-radius: 8px;
+    }
+
+    .resultado {
+        margin-top: 30px;
+        margin-left: 100px;
+        color: white;
+    }
+
+    .c {
+        width: 100%;
+        padding: 15px;
+        background: #f0f0f5;
+        box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+        margin-left: 25px;
+    }
+
+    .left {
+        text-align: left;
+        float: left;
+        width: 50%;
+    }
+
+    .right {
+        float: right;
+        width: 50%;
+    }
+</style>
+
+{% endblock style %}
+
+
+{% block main %}
+
+<body>
+    <div>
+        <h1>Planemaneto Celular</h1>
+        <div>
+            <div class="duascolunas">
+                <div class="left">
+                    <h2>Cobertura - Frequências</h2>
+                    <div class="c">
+                        <form action="" method="POST">
+                            {%csrf_token%}
+                            <label>frequência [MHz]: <input type="number" name="f"></label>
+                            <br>
+                            <button type="submit" style="color: white;">Calcular</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="resultado">
+                        {% load static %}
+                        <img src="{% static 'core/grafico8.png' %}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+{% endblock main %}

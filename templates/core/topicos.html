@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block style %}
+<style>
+    .conteudo{
+        border-radius: 8px;
+    }
+    h5{
+        border-radius: 8px;
+    }
+
+</style>
+
+{% endblock style %}
+
+{% block main %}
+
+<h3 style="color: white;">Tópicos abordados</h3>
+
+{% load custom_tags %}
+
+{% for topico in topicos  %}
+
+<h5>{{ topico }} </h5>
+<div >
+    {% for conteudo in topico.conteudos.all|sort_by:'ordem' %}
+    <div class="conteudo"> {{ conteudo }} </div>
+    {% endfor %}
+</div>
+
+{% endfor %}
+
+<br>
+
+<div id="novos"> 
+    <a href="{% url 'core:edita_topicos' %}" class="btn btn-outline-primary  btn-sm" >Edita</a>    
+</div>
+
+{% endblock main %}
+
+</body>
+
+</html>

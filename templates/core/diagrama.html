@@ -1,0 +1,131 @@
+{% extends "layout.html" %}
+
+{% block style %}
+<style>
+    .form {
+        width: 100%;
+        padding: 15px;
+        background: #f0f0f5;
+        box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    button {
+        font: 400 18px Roboto, sans-serif;
+        background-color: #34495e;
+        border-radius: 5px;
+        padding: 5px 10px;
+        margin: 5px 2px;
+        border: none;
+    }
+
+    form input {
+        width: 100%;
+        height: 60px;
+        padding: 0 24px;
+        margin: 5px 2px;
+        color: #333;
+        border: 1px solid #dcdce6;
+        border-radius: 8px;
+    }
+
+    .c {
+        width: 90%;
+        padding: 15px;
+        background: #f0f0f5;
+        box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+        margin-left: 10px;
+    }
+
+    h1 {
+        width: 100%;
+        padding: 15px;
+        background: #f0f0f5;
+        box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #34495e;
+    }
+
+    .left {
+        text-align: left;
+        float: left;
+        width: 50%;
+    }
+
+    .right {
+        float: right;
+        width: 50%;
+    }
+
+    .resultado {
+        margin-top: 150px;
+        margin-left: 150px;
+        color: white;
+    }
+</style>
+
+{% endblock style %}
+
+
+{% block main %}
+
+<body>
+    <div class="main">
+        <div class="titulo">
+            <h1>Aspetos de propagação</h1>
+        </div>
+        <div class="duascolunas">
+            <div class="left">
+                <div class="c">
+                    <form action="" method="POST">
+                        {%csrf_token%}
+                        <label>Potencia transmitida [dBm]: <input type="number" name="ptx"></label>
+                        <br>
+                        <label>frequência [MHz]: <input type="number" name="f"></label>
+                        <br>
+                        
+                        <select name="mod" required>
+                            <option value="Apenas Horizontal">Apenas Horizontal</option>
+                            <option value="Horizontal e Vertical">Horizontal e Vertical</option>
+                        </select>
+                        <br>
+                        <label>largura [m]: <input type="number" name="largura"></label>
+                        <br>
+                        <label>altura [m]: <input type="number" name="altura"></label>
+                        <br>
+                        <label>tamanho do pixel [m]: <input type="number" name="pixel"></label>
+                        <br>
+                        <select id="antena" name="antena" required>
+                            <option value="Antena 1">Antena 1</option>
+                            <option value="Antena 2">Antena 2</option>
+                        </select>
+                        <br>
+                        <label>Azimute da Antena [graus]: <input type="number" name="azimute_antena"></label>
+                        <label>Altura da Antena [m]: <input type="number" name="altura_antena"></label>
+                        <label>ltura do Terminal de Recepção [m]: <input type="number" name="altura_terminal"></label>
+                        <button type="submit" style="color: white;">Calcular</button>
+                    </form>
+                </div>
+            </div>
+            <div class="right">
+                <div class="resultado">
+                    {% load static %}
+                    <img src="{% static 'core/grafico3.png' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+{% endblock main %}

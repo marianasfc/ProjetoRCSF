@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block style %}
+<style>
+    .caixa{
+        width: 100%;
+        padding: 15px;
+        background: #f0f0f5;
+        box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    } 
+
+    h3{
+       color: white;
+    }
+</style>
+
+{% endblock style %}
+
+{% block main %}
+
+    <h3>Novo Conteúdo</h3>
+
+    <div class="caixa">
+        <form action="" method="POST">
+            {% csrf_token %}
+
+            <table>
+                {{conteudo_form}}
+            </table>
+            
+            <input type="submit" value="Gravar">
+        </form>
+    </div>
+
+
+
+{% endblock main %}
+
+</body>
+
+</html>
