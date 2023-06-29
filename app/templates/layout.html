@@ -28,44 +28,44 @@
 
         <div class="menu">
             <nav>
-                <a href="{% url 'core:index' %}" class="btn">Home</a>
-                <a href="{% url 'core:topicos' %}" class="btn">Topicos</a>
-                <a href="{% url 'core:conversor' %}" class="btn">unidades logaritmicas</a>
+                <a href="{% url 'app:index' %}" class="btn">Home</a>
+                <a href="{% url 'app:topicos' %}" class="btn">Topicos</a>
+                <a href="{% url 'app:conversor' %}" class="btn">unidades logaritmicas</a>
                 <div class="dropdown">
                     <button class="dropbtn">
                         limites fundamentais
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-content">
-                        <a href="{% url 'core:nyquist' %}">Limite de Nyquist</a>
-                        <a href="{% url 'core:shannon' %}">Capacidade de Shannon</a></a>
+                        <a href="{% url 'app:nyquist' %}">Limite de Nyquist</a>
+                        <a href="{% url 'app:shannon' %}">Capacidade de Shannon</a></a>
                     </div>
                 </div>
-                <a href="{% url 'core:meios' %}" class="btn">Meios de transmissão</a>
-                <a href="{% url 'core:sinais' %}" class="btn">Sinais</a>
+                <a href="{% url 'app:meios' %}" class="btn">Meios de transmissão</a>
+                <a href="{% url 'app:sinais' %}" class="btn">Sinais</a>
                 <div class="dropdown">
                     <button class="dropbtn">
                         Modulações
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-content">
-                        <a href="{% url 'core:modulacoes' %}">Teórica</a>
-                        <a href="{% url 'core:mpsk' %}">M-PSK</a>
-                        <a href="{% url 'core:mqam' %}">M-QAM</a></a>
+                        <a href="{% url 'app:modulacoes' %}">Teórica</a>
+                        <a href="{% url 'app:mpsk' %}">M-PSK</a>
+                        <a href="{% url 'app:mqam' %}">M-QAM</a></a>
                     </div>
                 </div>
-                <a href="{% url 'core:aspetos' %}" class="btn">Aspetos de propagação</a>
-                <a href="{% url 'core:cenario' %}" class="btn">Campanha de medidas</a>
-                <a href="{% url 'core:diagrama' %}" class="btn">Diagrama</a>
+                <a href="{% url 'app:aspetos' %}" class="btn">Aspetos de propagação</a>
+                <a href="{% url 'app:cenario' %}" class="btn">Campanha de medidas</a>
+                <a href="{% url 'app:diagrama' %}" class="btn">Diagrama</a>
                 <div class="dropdown">
                     <button class="dropbtn">
                         Planeamento Celular
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-content">
-                        <a href="{% url 'core:planeamento' %}" class="btn">Cobertura-Frequencias</a>
-                        <a href="{% url 'core:plan2' %}" class="btn">Cobertura-Atenuação</a>
-                        <a href="{% url 'core:plan3' %}" class="btn">Planeamento Celular2</a>
+                        <a href="{% url 'app:planeamento' %}" class="btn">Cobertura-Frequencias</a>
+                        <a href="{% url 'app:plan2' %}" class="btn">Cobertura-Atenuação</a>
+                        <a href="{% url 'app:plan3' %}" class="btn">Planeamento Celular2</a>
                     </div>
                 </div>
                 <div class="dropdown">
@@ -74,10 +74,10 @@
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-content">
-                        <a href="{% url 'core:trafego' %}" class="btn">Teoria</a>
-                        <a href="{% url 'core:erlangB' %}" class="btn">Erlang B - Prob. Bloqueio</a>
-                        <a href="{% url 'core:canais' %}" class="btn">Canais</a>
-                        <a href="{% url 'core:calctraf' %}" class="btn">Tráfego</a>
+                        <a href="{% url 'app:trafego' %}" class="btn">Teoria</a>
+                        <a href="{% url 'app:erlangB' %}" class="btn">Erlang B - Prob. Bloqueio</a>
+                        <a href="{% url 'app:canais' %}" class="btn">Canais</a>
+                        <a href="{% url 'app:calctraf' %}" class="btn">Tráfego</a>
                     </div>
                 </div>
             </nav>
