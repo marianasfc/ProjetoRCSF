@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block style %}
+    <style>
+
+    </style>
+
+{% endblock style %}
+
+{% block main %}
+<body>
+    <h1>Dimencionamento Celular</h1>
+        <div>
+            <div class="duascolunas">
+                <div class="left">
+                    <h2>Cobertura - Frequências</h2>
+                    <div class="c">
+                        <form action="" method="POST">
+                            {%csrf_token%}
+                            <label>Area [km2]: <input type="text" name="a"></label>
+                            <br>
+                            <label>pessoas por km2 : <input type="text" name="p"></label>
+                            <br>
+                            <label>velocidade de transmissão [Mbps]: <input type="text" name="v"></label>
+                            <br>
+                            <button type="submit" style="color: white;">Calcular</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="resultado">
+                        {% if resultado != null%}
+                        <div>
+                            <img src="data:image/png;base64,{{ resultado }}">
+                        </div>
+                        {% endif %}
+    
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+</body>
+{% endblock main %}

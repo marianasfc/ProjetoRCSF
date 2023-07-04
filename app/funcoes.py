@@ -1,3 +1,5 @@
+import base64
+import io
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 
@@ -375,6 +377,8 @@ def calcular_heatmap_potencia(ptx, f, modelo_propagacao, largura=1000, altura=10
     figura.savefig('static/core/grafico3.png')
                           
 def plot_variacao_atenuacao_freq(frequencias, constante_atenuacao):
+    if os.path.exists('ProjetoRedes/static/core/grafico5.png'):
+        os.remove('ProjetoRedes/static/core/grafico5.png')
     constante_atenuacao1 = 0
     # Converter as frequências para uma lista de valores numéricos
     frequencias = [int(f) for f in frequencias.split(",")]
@@ -397,7 +401,7 @@ def plot_variacao_atenuacao_freq(frequencias, constante_atenuacao):
     plt.grid(True)
     figura = plt.gcf()
     plt.close()
-    figura.savefig('static/core/grafico5.png')
+    figura.savefig('ProjetoRedes/static/core/grafico5.png')
 
 def plot_variacao_atenuacao(frequencia):
     atenuacoes = [2, 3.3, 4]
@@ -416,8 +420,8 @@ def plot_variacao_atenuacao(frequencia):
 
 
 def plot_relacao_ci():
-    if os.path.exists('static/core/grafico6.png'):
-        os.remove('static/core/grafico6.png')
+    if os.path.exists('ProjetoRedes/static/core/grafico6.png'):
+        os.remove('ProjetoRedes/static/core/grafico6.png')
     # Dados fictícios para as relações C/I para diferentes padrões celulares
     padroes_celulares = ['GSM', 'UMTS', 'LTE', '5G']
     relacao_ci = [10, 15, 20, 25]
@@ -428,11 +432,11 @@ def plot_relacao_ci():
     plt.title('Relação C/I para Diferentes Padrões Celulares')
     figura = plt.gcf()
     plt.close()
-    figura.savefig('static/core/grafico6.png')
+    figura.savefig('ProjetoRedes/static/core/grafico6.png')
 
 def plot_heatmap_ci():
-    if os.path.exists('static/core/grafico7.png'):
-        os.remove('static/core/grafico7.png')
+    if os.path.exists('ProjetoRedes/static/core/grafico7.png'):
+        os.remove('ProjetoRedes/static/core/grafico7.png')
     # Dados fictícios para o C/I
     padroes_celulares = ['GSM', 'UMTS', 'LTE', '5G']
     matriz_ci = np.random.rand(7, 7) * 30  # Matriz 7x7 com valores aleatórios de C/I
@@ -452,7 +456,7 @@ def plot_heatmap_ci():
     plt.gca().add_patch(plt.Rectangle((2.5, 2.5), 2, 2, fill=False, edgecolor=center_cell_color, linewidth=2))  # Desenhar retângulo para célula "útil"
     figura = plt.gcf()
     plt.close()
-    figura.savefig('static/core/grafico7.png')
+    figura.savefig('ProjetoRedes/static/core/grafico7.png')
 
 def erlang_b_probabilidade_bloqueio(tráfego, numero_canais):
     soma = 0
@@ -476,3 +480,136 @@ def erlang_b_numero_canais(trafego, prob_bloqueio):
 def erlang_b_tráfego(taxa_chegada, duração_média):
     tráfego = int(taxa_chegada) * int(duração_média)
     return tráfego
+
+
+def calcular_capacidade(tamanho_area, densidade_usuarios, debito_medio, largura_banda, pos_antenas, pt, variance):
+    largura = int(math.sqrt(tamanho_area))
+    total_utilizadores = tamanho_area * densidade_usuarios
+    capacidade_total = total_utilizadores * debito_medio
+    # capacidade_shannon = largura_banda * np.log2(1 + snr)
+    snrs = []
+    c = 0
+    for i in range(largura):
+        for j in range(largura):
+            c = c+1
+            distance = find_closest_antenna_distance(pos_antenas, (i, j))
+            distance = distance * 1000
+            snrs.append(calculate_snr(distance, pt, variance, largura_banda))
+    capacidade_shannon = []
+    for i in range(len(snrs)):
+        # print(f"snr =  {snrs[i]}")
+        cp_shn = largura_banda * np.log2(1 + snrs[i])
+        # print(f"shannon_cp = {cp_shn / 1000}Mbps")
+        debito_por_pessoa = cp_shn/1000  # / (debito_medio*densidade_usuarios)
+        capacidade_shannon.append(debito_por_pessoa)
+    capacidade_shannon = np.asarray(
+        capacidade_shannon).reshape(largura, largura)
+
+    fig, ax = plt.subplots()
+    plt.title("Heatmap da Capacidade Shannon")
+    plt.xlabel("Distância (km)")
+    plt.ylabel("Distância (km)")
+    # Generate heatmap here...
+    heatmap = sns.heatmap(capacidade_shannon)
+    cbar = heatmap.collections[0].colorbar
+    cbar.set_label('Mbps')
+    my_stringIObytes2 = io.BytesIO()
+    fig.savefig(my_stringIObytes2, format='png', dpi=150)
+    plt.close(fig)
+    my_stringIObytes2.seek(0)
+    heatmap = base64.b64encode(my_stringIObytes2.read())
+
+    return heatmap
+
+
+def planeamento_celular(tamanho_area, debito_medio, densidade_users):
+    tamanho_area = int(tamanho_area)
+    debito_medio = int(debito_medio)
+    densidade_users = int(densidade_users)
+    Pt = 1
+    variance = 10
+    largura_banda = 2.4e6
+    price_one_antenna = 3500
+    res = calcular_antenas(tamanho_area, debito_medio, densidade_users)
+    coordinates = res[0]
+    number_of_antennas = res[1]
+    radius_used = res[2]
+    heatmap = calcular_capacidade(tamanho_area, densidade_users,
+                                  debito_medio, largura_banda, coordinates, Pt, variance)
+    price_of_antennas = price_one_antenna * number_of_antennas
+    return [heatmap, number_of_antennas, radius_used, price_of_antennas]
+
+def find_closest_antenna_distance(antenna_positions, target_position):
+    closest_distance = float('inf')
+    closest_antenna = None
+    for antenna in antenna_positions:
+        distance = calculate_distance(antenna, target_position)
+        if distance < closest_distance:
+            closest_distance = distance
+            closest_antenna = antenna
+    return closest_distance
+
+def calculate_snr(distance, transmitted_power, noise_std_dev, frequency):
+    # Calculate the path loss using a simple distance-based model
+    L = 32 + 20 * math.log10(float(frequency)) + 20 * math.log10(float(300))
+    if distance != 0:
+        L = 32 + 20 * math.log10(float(frequency)) + 20 * math.log10(float(distance))
+    ptx = 10*math.log10(transmitted_power)
+    # Calculate the received signal strength
+    received_power = ptx - L
+    # Add Gaussian noise to the received signal
+    # noise = random.gauss(0, noise_std_dev)
+    noise = 0
+    received_power_with_noise = received_power + noise
+    # Calculate the SNR
+    snr = received_power_with_noise / noise_std_dev
+    snr = 10**(snr/10)
+    return snr
+
+def calcular_antenas(tamanho_area, binary_rate, number_of_people):
+    antenna_max_rate = 200
+    points = [49, 29, 13, 4]
+    circle_radius = 5
+    for i in range(len(points)):
+        circle_radius -= 1
+        binary_rate_for_point = antenna_max_rate/points[i]
+        value_needed = binary_rate * number_of_people
+        if binary_rate_for_point > value_needed:
+            circle_radius = circle_radius
+            break
+    if circle_radius == 0:
+        return "Precisa de se usar uma antena com mais do que 200Mbps", ""
+    print(f"raio usado = {circle_radius}")
+    # RAIO_COBERTURA = 1.9  # km
+    cobertura_antena = math.pi * circle_radius ** 2  # km^2
+    # Calcular o número de antenas necessárias
+    num_antenas_area = math.ceil(tamanho_area / cobertura_antena)
+    num_antenas_velocidade = math.ceil(binary_rate / antenna_max_rate)
+    num_antenas = max(num_antenas_area, num_antenas_velocidade)
+    largura = altura = math.sqrt(tamanho_area)
+    x = np.linspace(0, largura, int(math.sqrt(num_antenas)))
+    y = np.linspace(0, altura, int(math.sqrt(num_antenas)))
+    x, y = np.meshgrid(x, y)
+    tamanho_ponto = max(10, 1000 / num_antenas)
+    coordinates_antenas = []
+    for xi, yi in zip(x.flatten(), y.flatten()):
+        if xi == largura:
+            xi -= 1
+        if yi == largura:
+            yi -= 1
+        coordinates_antenas.append([int(xi), int(yi)])
+    print(f"O número de antenas necessárias é: {len(coordinates_antenas)}")
+    number_of_antennas = len(coordinates_antenas)
+    if circle_radius == 4:
+        center_coordinate = []
+        x = largura // 2
+        y = largura // 2
+        center_coordinate.append([int(x), int(y)])
+        return [center_coordinate, number_of_antennas, circle_radius]
+    return [coordinates_antenas, number_of_antennas, circle_radius]
+
+def calculate_distance(point1, point2):
+    x1, y1 = point1
+    x2, y2 = point2
+    distance = math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
+    return distance

@@ -3,14 +3,16 @@ from .models import Topico, Conteudo, Conversor
 from .forms import TopicoForm, ConteudoForm, ConversorForm
 import seaborn as sns
 import os
-from .funcoes import calculateNyquist, calculateShannon, conversor, erlang_b_numero_canais, erlang_b_tráfego, plot_heatmap_ci, plot_relacao_ci, plot_variacao_atenuacao, plot_variacao_atenuacao_freq, qam, cria_matriz, calcula_matriz_prx, calcula_matriz_espaco_livre, grafico, dadosPlo, espaco_livre, calcular_heatmap_potencia, erlang_b_probabilidade_bloqueio
+from .funcoes import calculateNyquist, calculateShannon, conversor, erlang_b_numero_canais, erlang_b_tráfego, planeamento_celular, plot_heatmap_ci, plot_relacao_ci, plot_variacao_atenuacao, plot_variacao_atenuacao_freq, qam, cria_matriz, calcula_matriz_prx, calcula_matriz_espaco_livre, grafico, dadosPlo, espaco_livre, calcular_heatmap_potencia, erlang_b_probabilidade_bloqueio
 
 # Create your views here.
 def index_view(request):
     return render(request, 'core/index.html')
 
+
 def aspetos_view(request):
     return render(request, 'core/aspetos.html')
+
 
 def topicos_view(request):
     topicos = Topico.objects.all().order_by('ordem')
@@ -18,6 +20,7 @@ def topicos_view(request):
         'topicos':topicos
     }
     return render(request, 'core/topicos.html', context)
+
 
 def conversor_view(request):
     resultado = "Resultado"
@@ -32,6 +35,7 @@ def conversor_view(request):
 
     return render(request, 'core/conversor.html', context)
 
+
 def nyquist_view(request):
     resultado = "Resultado"
     if request.method == "POST":
@@ -43,6 +47,7 @@ def nyquist_view(request):
     }
 
     return render(request, 'core/nyquist.html', context)
+
 
 def shannon_view(request):
     resultado = "Resultado"
@@ -56,14 +61,18 @@ def shannon_view(request):
 
     return render(request, 'core/shannon.html', context)
 
+
 def meios_view(request):
     return render(request, 'core/meios.html')
+
 
 def sinais_view(request):
     return render(request, 'core/sinais.html')
 
+
 def mpsk_view(request):
     return render(request, 'core/mpsk.html')
+
 
 def mqam_view(request):
     resultado = "Resultado"
@@ -77,8 +86,10 @@ def mqam_view(request):
     }
     return render(request, 'core/mqam.html', context)
 
+
 def modulacoes_view(request):
     return render(request, 'core/modulacoes.html')
+
 
 def aspetos_view(request):
     if os.path.exists('static/core/grafico1.png'):
@@ -108,12 +119,14 @@ def aspetos_view(request):
     }
     return render(request, 'core/aspetos.html', context)
 
+
 def cenario_view(request):
     resultado = dadosPlo()
     context = {
         'resultado': resultado
     }
     return render(request, 'core/cenario.html', context)
+
 
 def diagrama_view(request):
     if os.path.exists('static/core/grafico3.png'):
@@ -126,15 +139,16 @@ def diagrama_view(request):
         largura = request.POST['largura']
         altura = request.POST['altura']
         resultado = calcular_heatmap_potencia(ptx, f, mod, largura, altura, tamanho_pixel=10,
-                              antena='Omni', azimute_antena=0, altura_antena=20, altura_terminal=1.5)
+                            antena='Omni', azimute_antena=0, altura_antena=20, altura_terminal=1.5)
     context = {
         'resultado': resultado
     }
     return render(request, 'core/diagrama.html', context)
 
+
 def planeamento_view(request):
-    if os.path.exists('static/core/grafico5.png'):
-        os.remove('static/core/grafico5.png')
+    if os.path.exists('ProjetoRedes/static/core/grafico5.png'):
+        os.remove('ProjetoRedes/static/core/grafico5.png')
     resultado = "Resultado"
     if request.method == "POST":
         c = request.POST['c']
@@ -144,6 +158,7 @@ def planeamento_view(request):
         'resultado': resultado
     }
     return render(request, 'core/planeamento.html', context)
+
 
 def plan2_view(request):
     if os.path.exists('static/core/grafico8.png'):
@@ -157,6 +172,7 @@ def plan2_view(request):
     }
     return render(request, 'core/plan2.html', context)
 
+
 def plan3_view(request):
     if os.path.exists('static/core/grafico7.png'):
         os.remove('static/core/grafico7.png')
@@ -168,8 +184,18 @@ def plan3_view(request):
     }
     return render(request, 'core/plan3.html', context)
 
+
 def trafego_view(request):
-    return render(request, 'core/trafego.html')
+    resultado = "Resultado"
+    if request.method == "POST":
+        t= request.POST['t']
+        c = request.POST['c']
+        resultado = erlang_b_probabilidade_bloqueio(t, c)
+    context = {
+        'resultado': resultado,
+    }
+    return render(request, 'core/trafego.html', context)
+
 
 def erlangB_view(request):
     resultado = "Resultado"
@@ -182,6 +208,7 @@ def erlangB_view(request):
     }
     return render(request, 'core/erlangB.html', context)
 
+
 def canais_view(request):
     resultado = "Resultado"
     if request.method == "POST":
@@ -192,6 +219,7 @@ def canais_view(request):
         'resultado': resultado,
     }
     return render(request, 'core/canais.html', context)
+
 
 def calctraf_view(request):
     resultado = "Resultado"
@@ -204,6 +232,19 @@ def calctraf_view(request):
     }
     return render(request, 'core/calctraf.html', context)
 
+def dimensionamento(request):
+    resultado = None
+    context = None
+    if request.method == "POST":
+        a= request.POST['a']
+        p = request.POST['p']
+        v = request.POST['v']        
+        resultado = planeamento_celular(a, p, v)
+        context = {
+            'resultado ': resultado[0].decode('utf8'),
+        }
+    return render(request, 'core/dimensionamento.html', context)
+
 def edita_topicos_view(request):
 
     topicos = Topico.objects.all().order_by('ordem')
@@ -214,7 +255,6 @@ def edita_topicos_view(request):
 
     return render(request, 'core/edita_topicos.html', context)
 
-
 def novo_topico_view(request):
 
     topico_form = TopicoForm(request.POST or None)
@@ -224,7 +264,6 @@ def novo_topico_view(request):
 
     context = {'topico_form':topico_form}
     return render(request, 'core/novo_topico.html', context)
-
 
 def edita_topico_view(request, topico_id):
 
@@ -237,12 +276,10 @@ def edita_topico_view(request, topico_id):
     context = {'topico_form':topico_form, 'topico_id':topico_id}
     return render(request, 'core/edita_topico.html', context)
 
-
 def apaga_topico_view(request, topico_id):
     topico = Topico.objects.get(id=topico_id)
     topico.delete()
     return redirect('core:edita_topicos')
-
 
 def novo_conteudo_view(request):
 
@@ -254,7 +291,6 @@ def novo_conteudo_view(request):
     context = {'conteudo_form':conteudo_form}
     return render(request, 'core/novo_conteudo.html', context)
 
-
 def edita_conteudo_view(request, conteudo_id):
 
     conteudo = Conteudo.objects.get(id=conteudo_id)
@@ -265,7 +301,6 @@ def edita_conteudo_view(request, conteudo_id):
 
     context = {'conteudo_form':conteudo_form, 'conteudo_id':conteudo_id}
     return render(request, 'core/edita_conteudo.html', context)
-
 
 def apaga_conteudo_view(request, conteudo_id):
     conteudo = Conteudo.objects.get(id=conteudo_id)

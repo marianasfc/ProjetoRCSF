@@ -11,6 +11,7 @@ urlpatterns = [
     path("cenario/", views.cenario_view, name='cenario'),
     path("diagrama/", views.diagrama_view, name='diagrama'),
     path("planeamento/", views.planeamento_view, name='planeamento'),
+    path("dimensionamento/", views.dimensionamento, name='dimensionamento'),
     path("plan2/", views.plan2_view, name='plan2'),
     path("plan3/", views.plan3_view, name='plan3'),
     path("trafego/", views.trafego_view, name='trafego'),

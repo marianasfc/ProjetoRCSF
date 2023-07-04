@@ -86,34 +86,33 @@
 {% block main %}
 
 <body>
+    <h1>Planemaneto Celular</h1>
     <div>
-        <h1>Planemaneto Celular</h1>
-        <div>
-            <div class="duascolunas">
-                <div class="left">
-                    <h2>Cobertura - Frequências</h2>
-                    <div class="c">
-                        <form action="" method="POST">
-                            {%csrf_token%}
-                            <label>frequência [MHz]: <input type="text" name="f"></label>
-                            <br>
-                            <select name="c" required>
-                                <option value="espaço livre">Espaço livre</option>
-                                <option value="ambiente urbano">Ambiente urbano</option>
-                                <option value="indoor">Indoor</option>
-                            </select>
-                            <button type="submit" style="color: white;">Calcular</button>
-                        </form>
-                    </div>
+        <div class="duascolunas">
+            <div class="left">
+                <h2>Cobertura - Frequências</h2>
+                <div class="c">
+                    <form action="" method="POST">
+                        {%csrf_token%}
+                        <label>frequência [MHz]: <input type="text" name="f"></label>
+                        <br>
+                        <select name="c" required>
+                            <option value="espaço livre">Espaço livre</option>
+                            <option value="ambiente urbano">Ambiente urbano</option>
+                            <option value="indoor">Indoor</option>
+                        </select>
+                        <button type="submit" style="color: white;">Calcular</button>
+                    </form>
                 </div>
-                <div class="right">
-                    <div class="resultado">
-                        {% load static %}
-                        <img src="{% static 'core/grafico5.png' %}" alt="">
-                    </div>
+            </div>
+            <div class="right">
+                <div class="resultado">
+                    {% load static %}
+                    <img src="{% static 'core/grafico5.png' %}" alt="">
                 </div>
             </div>
         </div>
+    </div>
 
 </body>
 {% endblock main %}
